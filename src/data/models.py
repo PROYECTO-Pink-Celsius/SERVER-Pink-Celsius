@@ -1,9 +1,11 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Date, Time
 from src.data.database import Base
 
-class Item(Base):
-    __tablename__ = "items"
+class Data(Base):
+    __tablename__ = "data"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(String)
+    sector = Column(String)
+    temperature = Column(String)
+    date = Column(Date)
+    hour = Column(Time)

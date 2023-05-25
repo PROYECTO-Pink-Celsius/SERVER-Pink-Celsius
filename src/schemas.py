@@ -1,16 +1,22 @@
 from pydantic import BaseModel
+import datetime
 
-class ItemBase(BaseModel):
-    name: str
-    description: str
+class DataBase(BaseModel):
+    sector: str
+    temperature: str
+    date: datetime.date
+    hour: datetime.time
 
-class ItemCreate(ItemBase):
+class DataCreate(BaseModel):
+    sector: str
+    temperature: str
+    date: str
+    hour: str
+
+class DataUpdate(DataBase):
     pass
 
-class ItemUpdate(ItemBase):
-    pass
-
-class Item(ItemBase):
+class Data(DataBase):
     id: int
 
     class Config:

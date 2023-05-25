@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routes import items
+from .routes import data
 from src.data.database import engine
 
 app = FastAPI()
@@ -14,7 +14,7 @@ def startup_event():
     create_tables()
 
 # Registrar las rutas
-app.include_router(items.router)
+app.include_router(data.router)
 
 # Instalar dependencias
 #
@@ -24,4 +24,4 @@ app.include_router(items.router)
 # Levantar servidor
 #
 # uvicorn src.main:app --reload
-# uvicorn src.main:app --host 192.168.1.133 --port 9876
+# uvicorn src.main:app --host 192.168.1.200 --port 8080
