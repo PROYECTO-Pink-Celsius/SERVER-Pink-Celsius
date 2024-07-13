@@ -8,3 +8,9 @@ Este proyecto tiene como objetivo convertir una granja en un sistema IoT (Intern
 - Alertas y notificaciones: Se configurarán alertas automáticas que enviarán notificaciones en caso de que la temperatura supere ciertos límites establecidos.
 - Control de temperatura: Se implementarán actuadores para controlar la temperatura en caso de que sea necesario, como la activación de ventiladores o sistemas de calefacción.
 - Visualización de datos: Se proporcionará una interfaz intuitiva para visualizar los datos de temperatura en tiempo real, así como registros históricos para análisis y seguimiento.
+
+## Levantar servicio
+```sh
+uvicorn src.main:app --reload
+uvicorn src.main:app --host 192.168.1.200 --port 8000
+```
