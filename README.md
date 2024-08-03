@@ -13,6 +13,7 @@ Este proyecto tiene como objetivo convertir una granja en un sistema IoT (Intern
 ```sh
 uvicorn main:app --reload
 uvicorn main:app --host 192.168.1.200 --port 8000
+nohup uvicorn main:app --host 0.0.0.0 --port 8666 > uvicorn.log 2>&1 &
 ```
 
 ## 1. Despliegue (Local)
