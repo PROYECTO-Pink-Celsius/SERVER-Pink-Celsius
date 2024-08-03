@@ -11,6 +11,24 @@ Este proyecto tiene como objetivo convertir una granja en un sistema IoT (Intern
 
 ## Levantar servicio
 ```sh
-uvicorn src.main:app --reload
-uvicorn src.main:app --host 192.168.1.200 --port 8000
+uvicorn main:app --reload
+uvicorn main:app --host 192.168.1.200 --port 8000
+```
+
+## 1. Despliegue (Local)
+```docker
+# Actualizar el cliente
+./build.sh
+# Crear docker
+docker build -t pink-server:latest .
+# Comprimir docker
+docker save -o pink-server.tar pink-server:latest
+```
+## 2. Despliegue (Server)
+```docker
+# Cargar docker
+docker load -i mi-aplicacion.tar
+
+# Desplegar docker
+docker run -d -p 80:80 mi-aplicacion:latest
 ```
