@@ -1,35 +1,29 @@
 from fastapi import FastAPI, Request
-from starlette.templating import Jinja2Templates
+from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
+from starlette.templating import Jinja2Templates
 
-from src.routes import data
-from src.data.database import engine
+from src.data.database import engine, Base
+from src.routes import data, auth
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 app.include_router(data.router)
-
-
-# Crear las tablas en la base de datos
-def create_tables():
-    from src.data.models import Base
-    Base.metadata.create_all(bind=engine)
-
+app.include_router(auth.router)
 
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir todas las fuentes (puedes restringir esto más adelante)
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos los métodos HTTP
+    allow_headers=["*"],  # Permitir todos los headers
+)
 
 
 @app.get("/")
 async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-
-
-@app.on_event("startup")
-def startup_event():
-    create_tables()
-
-# Registrar las rutas
-
-
-# uvicorn main:app --reload
-# uvicorn main:app --host 192.168.1.127 --port 8000

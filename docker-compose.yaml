@@ -1,0 +1,9 @@
+services:
+  app:
+    image: granja-api-v1:latest
+    container_name: granja-api
+    volumes:
+      - /home/pi/granja/DB:/app/DB
+    ports:
+      - "8989:8989"
+

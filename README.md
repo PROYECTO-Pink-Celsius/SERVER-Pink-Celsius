@@ -2,34 +2,26 @@
 
 Este proyecto tiene como objetivo convertir una granja en un sistema IoT (Internet de las Cosas) que permita monitorear y controlar la temperatura de manera remota. El sistema IoT nos brindará la capacidad de supervisar la temperatura de la granja desde cualquier ubicación, lo que facilitará la gestión y el mantenimiento de las condiciones óptimas para el cultivo.
 
-## Características principales
+## python verion: 3.13
 
-- Monitoreo remoto de temperatura: El sistema IoT recopilará datos de temperatura de diferentes áreas de la granja y los transmitirá a una plataforma centralizada para su visualización y análisis.
-- Alertas y notificaciones: Se configurarán alertas automáticas que enviarán notificaciones en caso de que la temperatura supere ciertos límites establecidos.
-- Control de temperatura: Se implementarán actuadores para controlar la temperatura en caso de que sea necesario, como la activación de ventiladores o sistemas de calefacción.
-- Visualización de datos: Se proporcionará una interfaz intuitiva para visualizar los datos de temperatura en tiempo real, así como registros históricos para análisis y seguimiento.
-
-## Levantar servicio
-```sh
-uvicorn main:app --reload
-uvicorn main:app --host 192.168.1.200 --port 8000
-nohup uvicorn main:app --host 0.0.0.0 --port 8666 > uvicorn.log 2>&1 &
+#### 1. Crear un entorno
 ```
-
-## 1. Despliegue (Local)
-```docker
-# Actualizar el cliente
-./build.sh
-# Crear docker
-docker build -t pink-server:latest .
-# Comprimir docker
-docker save -o pink-server.tar pink-server:latest
+virtualenv -p python3.13 myenv
 ```
-## 2. Despliegue (Server)
-```docker
-# Cargar docker
-docker load -i mi-aplicacion.tar
+#### 2. Activar el entorno
 
-# Desplegar docker
-docker run -d -p 80:80 mi-aplicacion:latest
+```
+source myenv/bin/activate 
+```
+#### 3. Instalar dependencias
+```
+pip install -r requirements.txt 
+```
+#### 4. Lanzar el servidor
+```
+python -m uvicorn main:app --reload
+```
+#### 4.1 Opcion para indicar puerto
+```
+uvicorn main:app --host 192.168.1.133 --port 9876
 ```

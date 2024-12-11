@@ -1,27 +1,25 @@
+from datetime import datetime
+
 from pydantic import BaseModel
-import datetime
-
-
-class DataBase(BaseModel):
-    sector: str
-    temperature: str
-    date: datetime.date
-    hour: datetime.time
 
 
 class DataCreate(BaseModel):
     sector: str
     temperature: str
-    date: str
-    hour: str
 
-
-class DataUpdate(DataBase):
-    pass
-
-
-class Data(DataBase):
+class Data(DataCreate):
     id: int
+    date: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+class User(BaseModel):
+    username: str
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
